@@ -1,0 +1,15 @@
+# Keeps the free Render instance awake so the first visitor doesn't wait
+# ~50s for a cold start. Same trick the standalone Dungeon deployment used.
+name: keepalive
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ping /healthz
+        # update the URL if your Render service gets a different name
+        run: curl -fsS --max-time 30 https://gameclawd.onrender.com/healthz || true

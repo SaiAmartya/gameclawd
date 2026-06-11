@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AETHERWING — a 3D flappy odyssey</title>
+  <meta name="description" content="A 3D flappy bird odyssey above the glass sea. Flap an origami bird through glowing crystal gates as the sky cycles from sunset to starlight." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <div id="vignette"></div>
+  <div id="flash"></div>
+
+  <div id="hud">
+    <button id="mute-btn" title="toggle sound" aria-label="toggle sound">🔊</button>
+    <div id="score" class="hidden">0</div>
+
+    <div id="menu">
+      <a class="hub-link" href="/" data-testid="hub-link">&#11164; GAMECLAWD</a>
+      <p class="kicker">above the glass sea</p>
+      <h1 class="title">AETHER<span>WING</span></h1>
+      <p class="tagline">a 3D flappy odyssey</p>
+      <div class="chip">BEST &nbsp;<strong id="menu-best">0</strong></div>
+      <div class="lb">
+        <p class="lb-title">🏆 top pilots — worldwide</p>
+        <ol class="lb-list" id="menu-lb-list"><li class="lb-empty">tuning in…</li></ol>
+      </div>
+      <p class="instructions">
+        <span class="key">space</span> · <span class="key">click</span> · <span class="key">tap</span> — to flap
+      </p>
+      <p class="hint">survive the crystal gates · the sky remembers your score</p>
+    </div>
+
+    <div id="gameover" class="hidden">
+      <p class="kicker">flight over</p>
+      <div class="panel">
+        <div class="stat">
+          <span class="stat-label">SCORE</span>
+          <span class="stat-value" id="final-score">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">BEST</span>
+          <span class="stat-value gold" id="final-best">0</span>
+        </div>
+      </div>
+      <div id="submit-row" class="hidden">
+        <input id="pilot-name" maxlength="16" placeholder="your call sign" autocomplete="off" spellcheck="false" />
+        <button id="submit-btn">etch it</button>
+      </div>
+      <p id="submit-status"></p>
+      <div class="lb">
+        <p class="lb-title">🏆 top pilots</p>
+        <ol class="lb-list" id="over-lb-list"><li class="lb-empty">tuning in…</li></ol>
+      </div>
+      <p class="instructions"><span class="key">space</span> to soar again</p>
+      <p class="newbest hidden" id="newbest">★ new best flight ★</p>
+    </div>
+
+    <p id="credit">created by <strong>Claude Fable 5</strong></p>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

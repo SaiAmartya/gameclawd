@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameClawd — every prize is playable</title>
+  <meta name="description" content="GameClawd: an arcade claw machine full of games designed, built, and play-tested by Claude. Grab a capsule. Play solo or with a friend." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="hub.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ──────────── marquee ──────────── -->
+  <header class="marquee">
+    <div class="bulbs" aria-hidden="true"></div>
+    <h1 class="wordmark" data-testid="wordmark">
+      <span>G</span><span>A</span><span>M</span><span>E</span><span class="flicker">C</span><span>L</span><span>A</span><span>W</span><span>D</span>
+    </h1>
+    <p class="tagline">EVERY PRIZE PLAYABLE · GAMES BUILT BY CLAUDE</p>
+    <div class="bulbs bulbs--reverse" aria-hidden="true"></div>
+  </header>
+
+  <!-- ──────────── the cabinet ──────────── -->
+  <main class="cabinet">
+    <div class="cabinet-glass" aria-hidden="true"></div>
+
+    <!-- claw rig: track + cable + claw. JS drives the grab. -->
+    <div class="claw-rig" id="claw-rig" aria-hidden="true">
+      <div class="claw-track"></div>
+      <div class="claw-carriage" id="claw-carriage">
+        <div class="claw-cable"></div>
+        <svg class="claw" id="claw" viewBox="0 0 120 110" width="96" height="88">
+          <circle cx="60" cy="18" r="11" class="claw-hub" />
+          <g class="prong prong-l">
+            <path d="M60 24 C 28 34, 18 62, 26 92" fill="none" />
+            <path d="M26 92 l 8 -7" fill="none" />
+          </g>
+          <g class="prong prong-r">
+            <path d="M60 24 C 92 34, 102 62, 94 92" fill="none" />
+            <path d="M94 92 l -8 -7" fill="none" />
+          </g>
+          <g class="prong prong-m">
+            <path d="M60 24 C 58 50, 60 70, 60 96" fill="none" />
+            <path d="M60 96 l 6 -8" fill="none" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="pit-label" aria-hidden="true">▼ PRIZE PIT — PICK YOUR CAPSULE ▼</p>
+
+    <!-- capsules render here from /api/games -->
+    <section class="pit" id="pit" data-testid="pit" aria-label="Game library"></section>
+
+    <noscript><p class="noscript">GameClawd needs JavaScript — the claw refuses to move without it.</p></noscript>
+  </main>
+
+  <!-- ──────────── coin slot footer ──────────── -->
+  <footer class="coinslot">
+    <p class="freeplay"><span class="coin" aria-hidden="true">◉</span> INSERT COIN — JUST KIDDING, IT'S FREE PLAY</p>
+    <p class="operator">machine operated by <strong>CLAWD</strong> <span aria-hidden="true">🦞</span> · every game designed, coded &amp; play-tested by Claude</p>
+    <p class="status" id="machine-status" data-testid="machine-status">checking machine…</p>
+  </footer>
+
+  <template id="capsule-template">
+    <article class="capsule">
+      <div class="dome" aria-hidden="true"><span class="dome-icon"></span></div>
+      <div class="capsule-body">
+        <h2 class="capsule-title"></h2>
+        <p class="capsule-tagline"></p>
+        <p class="capsule-desc"></p>
+        <p class="capsule-meta"><span class="chip chip-players"></span><span class="chip chip-genre"></span></p>
+        <a class="play-btn" href="#"><span class="play-btn-label">GRAB &amp; PLAY</span></a>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="hub.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Render Blueprint — deploy GameClawd as a single Node web service.
+# In the Render dashboard: New + → Blueprint → point at this repo.
+services:
+  - type: web
+    name: gameclawd
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server/index.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: SCORE_SECRET
+        generateValue: true # HMAC secret for AETHERWING flight tokens
+      - key: BLOB_READ_WRITE_TOKEN
+        sync: false # optional: paste your Vercel Blob token for a durable
+                    # AETHERWING leaderboard; omit to use local file storage

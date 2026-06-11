@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Dungeon of Doom</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+
+  <!-- Three.js canvas is injected here -->
+  <div id="game-root"></div>
+
+  <!-- Damage vignette flash -->
+  <div id="damage-flash"></div>
+
+  <!-- In-game HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-top-left">
+      <div id="hp-bar"><div id="hp-fill"></div><span id="hp-text"></span></div>
+      <div id="dash-bar"><div id="dash-fill"></div><span class="dash-label">DASH</span></div>
+      <div id="stats-row">
+        <span id="coin-counter">&#9679; 0</span>
+        <span id="kill-counter">&#9876; 0</span>
+      </div>
+    </div>
+    <div id="hud-top-right">
+      <canvas id="minimap" width="220" height="220"></canvas>
+      <div id="code-badge" class="hidden">CODE <b id="code-text"></b></div>
+    </div>
+    <div id="boss-bar-wrap" class="hidden">
+      <div class="boss-name">DUNGEON OVERLORD</div>
+      <div id="boss-bar"><div id="boss-fill"></div></div>
+    </div>
+    <div id="respawn-msg" class="hidden"></div>
+    <div id="toasts"></div>
+  </div>
+
+  <!-- Touch controls (shown on touch devices) -->
+  <div id="touch-ui" class="hidden">
+    <div id="joystick"><div id="joystick-knob"></div></div>
+    <div id="touch-buttons">
+      <button id="btn-dash" class="touch-btn">DASH</button>
+      <button id="btn-attack" class="touch-btn big">&#9876;</button>
+    </div>
+  </div>
+
+  <!-- Main menu -->
+  <div id="menu">
+    <a class="hub-link" href="/" data-testid="hub-link">&#11164; GAMECLAWD</a>
+    <div class="menu-inner">
+      <h1 class="title">DUNGEON<span>of</span>DOOM</h1>
+      <p class="subtitle">Descend. Slay the Overlord. Escape with the gold.</p>
+      <div class="menu-buttons">
+        <button id="btn-solo" class="menu-btn">&#9876;&nbsp; Play Solo</button>
+        <button id="btn-host" class="menu-btn">&#9877;&nbsp; Host Co-op</button>
+        <div id="join-row">
+          <input id="join-code" maxlength="4" placeholder="CODE" autocomplete="off" spellcheck="false">
+          <button id="btn-join" class="menu-btn slim">Join</button>
+        </div>
+      </div>
+      <p id="menu-error" class="menu-error"></p>
+      <div id="leaderboard">
+        <div class="lb-title">&#9813; FASTEST SOLO CLEARS</div>
+        <ol id="lb-list"><li class="lb-empty">No clears yet &mdash; be the first!</li></ol>
+      </div>
+      <p class="controls-hint">
+        WASD / arrows to move &nbsp;&middot;&nbsp; SPACE or click to attack &nbsp;&middot;&nbsp; SHIFT to dash
+        &nbsp;&middot;&nbsp; M to mute &nbsp;&middot;&nbsp; B for music
+      </p>
+      <button id="btn-music" class="music-btn">&#9835; Music: On</button>
+      <p class="credits">
+        Created by Claude Fable 5 with the guidance of Sai Amartya B.L<br>
+        Contributions are welcome:
+        <a href="https://github.com/SaiAmartya/DungeonofDoom" target="_blank" rel="noopener">https://github.com/SaiAmartya/DungeonofDoom</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- End-of-run overlay (death / victory) -->
+  <div id="overlay" class="hidden">
+    <div class="overlay-inner">
+      <h2 id="overlay-title"></h2>
+      <p id="overlay-stats"></p>
+      <div id="score-submit" class="hidden">
+        <input id="score-name" maxlength="16" placeholder="YOUR NAME" autocomplete="off" spellcheck="false">
+        <button id="btn-submit-score" class="menu-btn slim">Etch Your Name</button>
+      </div>
+      <div class="overlay-buttons">
+        <button id="btn-restart" class="menu-btn">Run It Back</button>
+        <button id="btn-menu" class="menu-btn slim">Main Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

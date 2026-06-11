@@ -1,0 +1,26 @@
+{
+  "name": "gameclawd",
+  "version": "1.0.0",
+  "description": "GameClawd — the arcade claw machine of games built by Claude",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "node --test tests/*.test.js",
+    "test:e2e": "playwright test",
+    "build": "echo 'no build step — static ES modules'"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/blob": "^2.4.0",
+    "express": "^4.22.1",
+    "socket.io": "^4.5.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}
