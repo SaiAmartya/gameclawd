@@ -378,9 +378,11 @@ html, body {
 }
 #credit strong { font-weight: 700; color: var(--aqua); }
 
-/* ---- GameClawd hub link (added during platform migration) ---- */
+/* ---- GameClawd hub link (added during platform migration) ----
+   fixed to the viewport corner: #menu is a centered box, so absolute
+   positioning would float the badge over the title */
 .hub-link {
-  position: absolute;
+  position: fixed;
   top: max(14px, env(safe-area-inset-top));
   left: max(16px, env(safe-area-inset-left));
   font-family: 'Outfit', sans-serif;
