@@ -379,8 +379,11 @@ html, body {
 #credit strong { font-weight: 700; color: var(--aqua); }
 
 /* ---- GameClawd hub link (added during platform migration) ----
-   fixed to the viewport corner: #menu is a centered box, so absolute
-   positioning would float the badge over the title */
+   Lives directly under #hud: #menu has a transform, which would re-anchor
+   a fixed-position child to the menu box instead of the viewport.
+   Shown only on the menu and game-over screens. */
+.hub-link { display: none; }
+#hud:has(#menu:not(.hidden), #gameover:not(.hidden)) .hub-link { display: inline-block; }
 .hub-link {
   position: fixed;
   top: max(14px, env(safe-area-inset-top));
